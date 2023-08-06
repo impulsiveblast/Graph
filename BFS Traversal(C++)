@@ -1,0 +1,31 @@
+class Solution{
+    public:
+    
+    vector<int> bfsofGraph(int v,vector<int> adj[]){   //v=no of nodes,vector<int> adj[]=adjecency list given in the problem
+     
+     int vis[n]={0};   //all elements in visited array have been made 0 as none of them are supposed to be visited initially
+        vis[0]=1;  //assuming the graph to be 0 based
+        queue<int> q;
+        q.push(0);        //starting node i.e 0 insrted inside the queue
+        vector<int> bfs;  //vector to store bfs values
+        while(q.size()!=0)   //remove elements from queue until its empty
+        {
+            int node=q.front();
+            q.pop();
+            bfs.push(node);  //inserting node values into bfs for traversal
+            
+            for(auto it: adj[node])   //checking for neighbours of the node in adjecency listlist
+            {
+                if(vis[it]!=1)    //if neighbour hasn't already been visited before mark it visited and insert it into queue.
+                {
+                    vis[it]=1; 
+                   q.push(it); 
+                }
+            }
+        }
+        
+        return bfs;   //bfs traversal list is ready
+        
+    }
+};  
+
