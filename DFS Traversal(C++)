@@ -1,0 +1,27 @@
+ class solution{
+     private:
+     void dfs(int node,vector<int> adj[],int vis[],vector<int> &ls)
+     {
+         vis[node]=1;
+         ls.push_back(node);
+         //traverse all neighbours using elements in adjecency list of that node
+         for(auto it:adj[node])
+         {
+             if(!vis[it])
+             {
+                 dfs(it,adj,vis,ls);
+             }
+         }
+     }
+     public:
+     vector<int> dfsofgrph(int v,vector<int> adj[]) //v==Total nodes ,adj[] adjecency list
+     {
+         int vis[v]={0};   //initially all the visited nodes=0 as none of them has been visited till now
+         int start=0;
+         vector<int> ls;
+         dfs(start,adj,vis,ls);
+         
+         return ls;
+         
+     }
+ }  
