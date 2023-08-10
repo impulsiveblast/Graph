@@ -1,0 +1,45 @@
+ class solution{   //no of provinces c++ gfg
+     public:
+     
+     void dfs(int node,vector<vector <int> adjl[],vector<int> vis)
+     {
+         vis[node]=1;
+         
+         for(auto it: adjls[node])
+         {
+             if(vis[node]!=1)
+             {
+                 dfs(node,adjl,vis);
+             }
+         }
+     }
+     int numProvinces(vector<vector<int>> adj,int V)  //adj == adjecency matrix
+     {
+        //making adjecency list adjl[v];
+        vector<int> adjl[v];
+        for(int i=0;i<V;i++)
+        {
+            for(int j=0;j<V;j++)
+            {
+                if(adj[i][j]==1 && i!=j)
+                {
+                    adjl[i].push_back(j);
+                    adjl[j].push_back(i);
+                }
+            }
+        }
+        
+        int vis[v]={0}; //visited list checking weather a node has got traversed or not
+        int cnt=0;
+        for(int i=0;i<v;i++)
+        {
+            if(vis[i]!=1)
+            {
+                cnt++;
+                dfs(i,adjl,vis);
+            }
+        }
+     }
+ };
+ 
+ 
