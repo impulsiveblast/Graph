@@ -1,6 +1,6 @@
  class solution{
      private:
-     void dfs(int node,vector<int> adj[],int vis[],vector<int> &ls)
+     void dfs(int node,vector<int> adj[],int vis[],vector<int> &ls)   //ls is the traversal list showing the dfs traversal
      {
          vis[node]=1;
          ls.push_back(node);
