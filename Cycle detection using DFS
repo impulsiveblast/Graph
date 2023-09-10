@@ -1,0 +1,39 @@
+//cycle detection in undirected graph using dfs
+class solution{
+    private:
+    bool dfs(int node,int parent,vector<int> vis[],vector<int> adj[]) //function to be called every time in recursion
+    {
+        vis[node]=1;
+        for(auto it:adj[node])
+        {
+            if(!vis[it])  //vis[it]!=1
+            {
+              if(dfs(it,parent,vis[],adj[])==true)
+              return true;   //it has a cycle
+            }
+            else if(it!=parent)   //it==old parent and parent==new parent
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    public:
+    
+    bool cycleexist(int V,vector<int>adj[])
+    {
+        int vis[V]={0};   //0 based inhdexing declaring all the nodes to be 0
+        
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])   
+            {
+                if(dfs(i,-1,vis,adj)==true)  //if the node hasnt been visited yet hence it is not connected to its previous node hence parent=-1
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
