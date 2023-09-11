@@ -1,0 +1,68 @@
+//distance for nearest 1 for each cell
+// graph:n*m 
+class solution{
+   public:
+   
+   vector<vector<int>nearest(vector<vector<int>>grid)  //answer has to be returned in another grid containing distances
+   {
+        int n=grid.size(); //vertical length
+        int m=grid[0].size(); //horizontal length
+        
+        vector<vector<int>> vis(n,vector<int> (m,0));  //creating a vesited matrix using vector of vectors
+        //since the matrix is n*m so n vectors with each vector having m size with initial value declared as 0
+        
+        vector<vector<int>> dis(n,vector<int> (m,0)); //distance matrix for storing distance of each cell from its nearest 1
+        
+        queue<pair<pair<int,int>,int>> q; //creating a queue containing cordinates of each grid alongwith distance of each from its nearest 1
+    
+    
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;i<m;j++)
+            {
+                if(grid[i][j]==1)
+                {
+                    q.push({i,j},0);   //storing the cordinates as well as distance from nearest 1 which is 0 in this case.
+                    vis[i][j]=1;
+                }
+                else
+                {
+                    vis[i][j]=0;
+                }
+            }
+        }
+        
+        //bfs traversal
+        int derow[]={-1,0,1,0};  //possible change in row 
+        int delcol[]={0,1,0,-1}; //possible change in column
+        
+        while(!q.empty)  //bfs traversal tilll queue is non empty
+        {
+            int row = q.front().first.first;  //1st value of cordinates inserted is row and next one is column
+            int col = q.front().first.second;
+            int steps=q.front().second; //no of steps to reach 1...  will be used to check the distance from 1
+            
+            q.pop();
+            dist[row][col]=steps;
+            
+            for(int i=0;i<4;i++)
+            {
+                int row = row+delrow[i];
+                int ncol = col+delcol[i];
+                
+                if(nrow>=0 && nrow<n && ncol>=0 && ncol<m &&vis[nrow][ncol]==0)
+                {
+                    vis[nrow][ncol]=1;
+                    q.push({nrow,ncol},steps+1);  //for each 1 movement 1 step similarly checked for each index
+                }
+                //all remaining are assumed 0 as all have already been visited
+            }
+            
+            
+        }
+        
+        return dis;
+        
+   }
+     
+}
