@@ -1,22 +1,43 @@
 class solution{
+    
+    private:
+    
+    void dfs(int row,int col,vector<vector<int>> &vis,vector<vector<int>> &mat,int delrow[],int delcol[])
+    {
+        vis[row][col]=1;
+        
+        int n=mat.size();
+        int m=mat[0].size();
+        
+        for(int i=0;i<;i++)
+        {
+            int nrow=row+delrow[i];
+            int ncol=col+delcol[i];
+            if(!vis[nrow][ncol] && mat[nrow][ncol]=='O' && nrow>=0 && nrow<n && ncol>=0 && ncol<m)  //dfs in all possible directions
+            {
+                dfs(nrow,ncol,vis,delrow,delcol);  
+            }
+        }
+    }
     public:
     vector<vector<char>> fill(int n,int m,vector<vector<char>> mat)
     {
         vector<vector<int>> vis(n,vector<int>(m,0)); //visited matrix for given O,X Matrix made
-        
+        int delcol={-1,0,1,0};
+        int delrow={0,-1,0,1};
          //first and last row
              for(int j=0;j<m;j++)
              {
                  
                  if(mat[0][j]=='O' && !vis[0][j])
                  {
-                     dfs(0,j,vis,mat);  //marks 1 to all 'O'
+                     dfs(0,j,vis,mat,delrow,delcol);  //marks 1 to all 'O' containing indexes
 
                  }
                  
                  if(mat[n-1][j]=='O' && !vis[n-1][j])
                  {
-                     dfs(n-1,j,vis,mat);
+                     dfs(n-1,j,vis,mat,delrow,delcol);
                  }
              }
              
@@ -25,12 +46,12 @@ class solution{
              {
                  if(mat[j][0]=='O' && !vis[0][j]) 
                  {
-                     dfs(j,0,vis,mat); //marks 1 to all 'O'
+                     dfs(j,0,vis,mat,delrow,delcol); //marks 1 to all 'O'
                  }
                  
                  if(mat[j][m-1]=='O' && !vis[n-1][j])
                  {
-                     dfs(j,m-1,vis,mat);
+                     dfs(j,m-1,vis,mat,delrow,delcol);
                  }
                  
              }
@@ -39,13 +60,15 @@ class solution{
          {
              for(int j=0;j<m;j++)
              {
-                 if(!vis[i][j] && mat[i][j]=='O')
+                 if(!vis[i][j] && mat[i][j]=='O')  //unvisited O must get converted to X borderones wont be get converted
                  {
                      mat[i][j]='X';
                  }
              }
          }
          
+         
+         return mat;
          
          
         
