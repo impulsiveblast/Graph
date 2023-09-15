@@ -1,0 +1,69 @@
+class solution{
+    
+    private:
+    bool isBipartite(int start,int v,vector<int> adj[],int col[]){
+        queue<int> q;
+        q.push(start);  //0 based indexing
+        int colour[v];
+        colour[start]=0;
+        for(int i=0;i<v;i++)
+        {
+            colour[i]=-1;
+        }
+        
+        while(!q.empty())
+        {
+            int node=q.front();
+            q.pop();
+            
+            for(auto it:adj[node])
+            {
+                //traversing all the adjecent nodes of node selected
+                
+                if(colour[it]==-1)
+                {
+                    //it not coloured till now paint with oposite colour
+                    if(colour[node]==0)
+                    {
+                        colour[it]=1;
+                        q.push(it);
+                    }
+                    else
+                    {
+                        colour[it]=0;
+                        q.push(it);
+                    }
+                }
+                else  //checking weather the already coloured node is of opposite colour or not
+                {
+                    if(colour[it]==colour[node])
+                    {
+                        return false;
+                    }
+                }
+            }
+            
+            return true;
+        }
+    }
+    
+    public:
+    
+    bool check(int v,vector<int> adj[])
+    {
+        int col[v];
+        for(int i=0;i<v;i++)
+        {
+            if(isBipartite(i,v,adj,col)==false)
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    
+ }
+}
+    
