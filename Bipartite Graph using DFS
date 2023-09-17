@@ -1,0 +1,51 @@
+class Solution{
+    
+    private:
+    bool dfs(int node,int col,int colour[],int adj[])
+    {
+        colour[node]=col;
+        
+        for(auto it:adj[node])
+        {
+            
+            if(colour[it]==-1)
+            {
+                if(dfs(it,!col,colour,adj)==false)
+                {
+                    return false;
+                }
+            }
+            else if(colour[it]==col)
+            {
+                return false;
+            }
+            
+        }
+        
+        return true;
+        
+    }
+    public:
+    bool isBipartite(int v,vector<int> adj)
+    {
+           int colour[v];
+           
+           for(int i=0;i<v;i++)
+           {
+             colour[i]=-1;  
+           }
+           
+           for(int i=0;i<v;i++)
+           {
+               if(colour[i]=-1)
+               {
+                   if(dfs(i,0,colour,adj)==false)
+                   {
+                       return false;
+                   }
+               }
+           }
+           
+           return true;
+    }
+}
