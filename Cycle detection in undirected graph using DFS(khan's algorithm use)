@@ -1,0 +1,52 @@
+//cycle dedection in directed graph using dfs
+
+class solution:
+bool cycledet(int v,int adj[])
+{
+    int indegree[v]={0};
+    
+    for(int i=0;i<v;i++)
+    {
+        for(auto it:adj[v])
+        {
+            indegree[it]++;
+        }
+    }
+    
+    queue<int> q;
+   
+       for(int i=0;i<v;i++)
+    {
+        if(indegree[i]==0)
+        {
+            q.push(i);
+        }
+    }
+    int count=0;
+    
+    while(!q.empty())
+    {
+        int node=q.front();
+        count++;
+        for(auto it:adj[node])
+        {
+            indegree[it]--;
+            
+            if(indegree[it]==0)
+            {
+                q.push(it);
+            }
+        }
+        
+    }
+    
+    if(count==v)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+    
+}
