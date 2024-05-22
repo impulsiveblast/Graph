@@ -1,5 +1,12 @@
  //cycle detection in a graph using bfs
- 
+ //why do we use parent and node both in queue ?
+//No Parent Tracking:
+//In BFS (or DFS) for cycle detection in undirected graphs,
+//it is crucial to track the parent of each node to distinguish
+//between a cycle and a back edge. Without tracking the parent,
+//the code will incorrectly detect a cycle whenever it revisits any node, even if it's just backtracking to the parent.
+
+
  class solution{   
      private:   //declaring it private so that only can be acessed within the class
      
