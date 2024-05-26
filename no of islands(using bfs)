@@ -1,0 +1,166 @@
+//check all 8 directions if they are  visited  or not
+//apply bfs to check till where all connected components exist with a given index in grid
+
+
+class Solution {
+    
+  public:
+    // Function to find the number of islands.
+    int numIslands(vector<vector<char>>& grid) {
+        // Code here
+       queue<pair<int,int>> q;
+       map<pair<int,int>,int> vis;
+       vector<pair<int,int>> v;
+      int t1=0;
+       
+       for(int j=0;j<grid.size();j++)
+       {
+           for(int i=0;i<grid[j].size();i++)
+           {
+               if(grid[j][i]=='1')
+               {
+                  t1++;
+                   vis[{j,i}]=0;
+                   v.push_back({j,i});
+               }
+           }
+       }
+       
+
+    int a=grid[0].size();
+    int b=grid.size();
+    
+    int t=0;
+    
+    for(int i=0;i<v.size();i++)
+    {
+        if(vis[v[i]]==0)
+        {
+           q.push(v[i]);
+           
+           while(q.size()!=0)
+           {
+               pair<int,int> p0;
+               p0=q.front();
+               int j1=p0.first;
+               int i1=p0.second;
+               vis[p0]=1;
+               q.pop();
+               
+              if(i1+1<a)
+              {
+                  if(grid[j1][i1+1]=='1')
+                  {
+                      if(vis[{j1,i1+1}]!=1)
+                    { 
+                        vis[{j1,i1+1}]=1;
+                        q.push({j1,i1+1});
+                    }
+                  }
+                  
+              }
+              
+              if(i1-1>=0)
+              {
+                  if(grid[j1][i1-1]=='1')
+                  {
+                      if(vis[{j1,i1-1}]!=1)
+                     {
+                         vis[{j1,i1-1}]=1;
+                         q.push({j1,i1-1});
+                     }
+                  }
+              }
+              
+              if(j1+1<b)
+              {
+                   if(grid[j1+1][i1]=='1')
+                   {
+                       if(vis[{j1+1,i1}]!=1)
+                      {
+                          vis[{j1+1,i1}]=1;
+                          q.push({j1+1,i1});
+                      }
+                   }
+                   
+              }
+              
+              if(j1-1>=0)
+              {
+                  if(grid[j1-1][i1]=='1')
+                  {
+                      if(vis[{j1-1,i1}]!=1)
+                      {
+                          vis[{j1-1,i1}]=1;
+                          q.push({j1-1,i1});
+                      }
+                  }
+              }
+              
+              
+              
+             
+             
+             if(i1-1>=0 && j1+1<b )
+             {
+                 if(grid[j1+1][i1-1]=='1')
+                  {
+                      if(vis[{j1+1,i1-1}]!=1)
+                     {
+                         vis[{j1+1,i1-1}]=1;
+                         q.push({j1+1,i1-1});
+                     }
+                  }
+             }
+             
+             if(i1+1<a && j1+1<b)
+             {
+                 if(grid[j1+1][i1+1]=='1')
+                  {
+                      if(vis[{j1+1,i1+1}]!=1)
+                     {
+                         vis[{j1+1,i1+1}]=1;
+                         q.push({j1+1,i1+1});
+                     }
+                  }
+             }
+             
+             if(i1+1<a && j1-1>=0)
+             {
+                 if(grid[j1-1][i1+1]=='1')
+                  {
+                      if(vis[{j1-1,i1+1}]!=1)
+                     {
+                         vis[{j1-1,i1+1}]=1;
+                         q.push({j1-1,i1+1});
+                     }
+                  }
+             }
+             
+             if(i1-1>=0 && j1-1>=0)
+             {
+                 if(grid[j1-1][i1-1]=='1')
+                  {
+                      if(vis[{j1-1,i1-1}]!=1)
+                     {
+                         vis[{j1-1,i1-1}]=1;
+                         q.push({j1-1,i1-1});
+                     }
+                  }
+             }
+           
+           
+           }
+        
+         t++;   
+        }
+    }
+       
+       
+       
+       
+       return t;
+       
+       
+    }
+};
