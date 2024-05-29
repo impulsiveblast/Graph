@@ -1,0 +1,65 @@
+//Why dfs?
+//because due to back tracking path visited becomes 0 and if a cycle with 
+//2 directions are present then it can easily detect the fault .
+//else if same direction is throught the cycle then checking bool path visited=1 would detect the cycle
+//meanwhile as recursion is absent in bfs it it is only used to detect to detect cycle in undirected graph
+
+class Solution {
+    
+    public:
+    
+    bool checkcycle(int node,vector<int> adj[],int vis[],int pathvis[])
+    {
+          
+          vis[node]=1;
+          pathvis[node]=1;
+          
+          for(auto it=adj[node].begin();it!=adj[node].end();it++)
+          {
+              if(vis[*it]==0)
+             {
+              if(checkcycle(*it,adj,vis,pathvis)==true)
+              {
+                  return true;
+              }
+             }
+             else if(pathvis[*it]==1)
+             {
+              return true;
+             }
+          }
+          
+          pathvis[node]=0; //for backtracking and making all nodes in paths before 0
+          return false;
+         
+    }
+    
+    
+    
+  public:
+    // Function to detect cycle in a directed graph.
+    bool isCyclic(int V, vector<int> adj[]) {
+        // code here
+        
+        int node=0;
+        int vis[V]={0};
+        int pathvis[V]={0};
+        
+        for(int i=0;i<V;i++)
+        {
+            if(checkcycle(i,adj,vis,pathvis))
+           {
+            return true;
+           }
+        //   else
+        //   {
+        //     return false;
+        //     }
+        }
+        
+        
+        return false;
+        
+        
+    }
+};
