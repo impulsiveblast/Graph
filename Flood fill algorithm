@@ -1,0 +1,29 @@
+class Solution {
+
+public:
+void dfs(vector<vector<int>>& image, int sr, int sc, int color,int k)
+{
+   
+    if(sr>=image.size() || sr<0 || sc >=image[0].size()|| sc<0 || image[sr][sc]!=k || k==color)
+    {
+        return;
+    }
+
+    image[sr][sc]=color;
+
+    dfs(image,sr+1,sc,color,k);  //recursion in each of 4 directions to check if image[sr][sc]==k exists or not
+    dfs(image,sr-1,sc,color,k);
+    dfs(image,sr,sc+1,color,k);
+    dfs(image,sr,sc-1,color,k);
+
+}
+
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        
+       int k=image[sr][sc];
+      dfs(image,sr,sc,color,k);
+       return image;
+
+    }
+};
