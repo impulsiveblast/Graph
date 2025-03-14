@@ -1,4 +1,9 @@
 //cycle detection in undirected graph using dfs
+
+//parent->child  vis[child]=1 cycle confirm
+//child->parent vis[parent]=1 not confirm
+
+
 class solution{
     private:
     bool dfs(int node,int parent,vector<int> vis[],vector<int> adj[]) //function to be called every time in recursion
