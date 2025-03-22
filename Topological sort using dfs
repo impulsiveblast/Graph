@@ -1,40 +1,50 @@
-//topological sort algorithm
-class solution:
-public:
-
-void dfs(int i,int vis[],int adj[],stack<int> &st)
-{
+class Solution {
+    public:
     
-    
-        vis[i]=1;
-        st.push(i);
-        for(auto it:adj[i])
+    void sort_it(vector<vector<int>>& adj,stack<int> &st,vector<int> &vis,int cur)
+    {
+        if(vis[cur]==0)
         {
-            if(!vis[i])
+            vis[cur]=1;
+        }
+        
+        for(int i=0;i<adj[cur].size();i++)
+        {
+            if(vis[adj[cur][i]]==0)
             {
-                dfs(it,vis,adj,st);
+                sort_it(adj,st,vis,adj[cur][i]);
             }
         }
+        
+        st.push(cur);   //the element with no further eges unvisited then insert into stack
+        return;
+        
+    }
     
-}
-vector<int> topsort(int v,vector<int> adj[])
-{
-    int vis[v]={0};
-    stack<int> st;
-    for(int i=0;i<v;i++)
-    {
-        if(!vis[i])
+  public:
+    // Function to return list containing vertices in Topological order.
+    vector<int> topologicalSort(vector<vector<int>>& adj) {
+        // Your code here
+        
+        vector<int> vis(adj.size(),0);
+        stack<int> st;
+        
+        
+        for(int i=0;i<adj.size();i++)
         {
-            dfs(i,vis,adj,st);
+            if(vis[i]==0)
+            {
+                sort_it(adj,st,vis,i);
+            }
         }
+        
+        vector<int> v;
+        
+        while(st.size()!=0)
+        {
+            v.push_back(st.top());
+            st.pop();
+        }
+        return v;
     }
-    
-    vector<int> v1;
-    while(!st.empty())
-    {
-      v1.push_back(st.top());
-      st.pop();
-    }
-    
-    return v1;
-}
+};
